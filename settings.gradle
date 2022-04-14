@@ -1,0 +1,6 @@
+rootProject.name = 'grpc-bds'
+
+include('grpc-bds-client-demo')
+include('grpc-bds-server-demo')
+include('grpc-bds-interface-demo')
+
