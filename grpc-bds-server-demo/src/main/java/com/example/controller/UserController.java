@@ -17,43 +17,16 @@ public class UserController {
 
     @GetMapping("/user/{oid}")
     public Mono<UserDTO> getByOid(@PathVariable("oid") String oid) {
-        return userService.fetchByOid(oid)
-                .map(entity -> UserDTO
-                        .builder()
-                        .oid(entity.getOid())
-                        .userId(entity.getUserId())
-                        .username(entity.getUsername())
-                        .password(entity.getPassword())
-                        .cellPhone(entity.getCellPhone())
-                        .build()
-                );
+        return userService.fetchByOid(oid);
     }
 
     @GetMapping("/user/{userId}")
     public Mono<UserDTO> getByUserId(@PathVariable("userId") String userId) {
-        return userService.fetchByUserId(userId)
-                .map(entity -> UserDTO
-                        .builder()
-                        .oid(entity.getOid())
-                        .userId(entity.getUserId())
-                        .username(entity.getUsername())
-                        .password(entity.getPassword())
-                        .cellPhone(entity.getCellPhone())
-                        .build()
-                );
+        return userService.fetchByUserId(userId);
     }
 
     @PostMapping("/user")
-    public Mono<UserDTO> addUser(@RequestBody User user) {
-        return userService.addUser(user)
-                .map(entity -> UserDTO
-                        .builder()
-                        .oid(entity.getOid())
-                        .userId(entity.getUserId())
-                        .username(entity.getUsername())
-                        .password(entity.getPassword())
-                        .cellPhone(entity.getCellPhone())
-                        .build()
-                );
+    public Mono<UserDTO> addUser(@RequestBody UserDTO user) {
+        return userService.addUser(user);
     }
 }

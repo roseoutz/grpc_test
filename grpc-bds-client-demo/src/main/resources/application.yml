@@ -1,3 +1,6 @@
+server:
+  port: 9000
+
 grpc:
   host: localhost
-  port: 8099
+  port: 8888

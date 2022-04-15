@@ -12,8 +12,6 @@ public abstract class AbstractStub {
     @Value("${grpc.port}")
     private int port;
 
-    private ManagedChannel managedChannel;
-
     public ManagedChannel channel() {
         return ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
     }

@@ -1,13 +1,14 @@
 package com.example.domain.service;
 
+import com.example.domain.dto.UserDTO;
 import com.example.domain.entity.User;
 import reactor.core.publisher.Mono;
 
 public interface UserService {
 
-    Mono<User> addUser(User user);
+    Mono<UserDTO> addUser(UserDTO user);
 
-    Mono<User> fetchByOid(String oid);
+    Mono<UserDTO> fetchByOid(String oid);
 
-    Mono<User> fetchByUserId(String userId);
+    Mono<UserDTO> fetchByUserId(String userId);
 }

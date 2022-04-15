@@ -1,5 +1,6 @@
 package com.example.grpc;
 
+import com.example.domain.dto.UserDTO;
 import com.example.domain.entity.User;
 import com.example.domain.service.UserService;
 import com.google.protobuf.NullValue;
@@ -16,25 +17,25 @@ public class UserGrpcService extends UserGrpcServiceGrpc.UserGrpcServiceImplBase
 
     private final UserService userService;
 
-    protected UserRpcResponse convertToResponse(User user) {
+    protected UserRpcResponse convertToResponse(UserDTO user) {
         return UserRpcResponse.newBuilder()
                 .setStatusCode(HttpStatus.OK.value())
                 .setSuccess(true)
                 .setErrorCode(NullValue.NULL_VALUE)
                 .setErrorDescription(NullValue.NULL_VALUE)
+                .putDataMap("oid", user.getOid())
                 .putDataMap("userId", user.getUserId())
                 .putDataMap("username", user.getUsername())
                 .putDataMap("cellPhone", user.getCellPhone())
                 .build();
     }
 
-    protected User convertToUser(UserRpcRequest request) {
-        return User.builder()
+    protected UserDTO convertToUser(UserRpcRequest request) {
+        return UserDTO.builder()
                 .userId(request.getUserId())
                 .username(request.getUsername())
                 .password(request.getPassword())
                 .cellPhone(request.getCellPhone())
-                .isNew(true)
                 .build();
     }
     @Override
@@ -54,7 +55,8 @@ public class UserGrpcService extends UserGrpcServiceGrpc.UserGrpcServiceImplBase
     @Override
     public void getByUserId(UserIDRequest request,
                             io.grpc.stub.StreamObserver<UserRpcResponse> responseObserver) {
-        userService.fetchByUserId(request.getUserId())
+        String userId = request.getUserId();
+        userService.fetchByUserId(userId.replace("\\n", ""))
                 .filter(Objects::nonNull)
                 .map(this::convertToResponse)
                 .subscribe(

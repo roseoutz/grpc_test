@@ -1,17 +1,14 @@
 package com.example.domain.entity;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Getter
-@Setter
-@Builder
+@RequiredArgsConstructor
+@Data
 @Table("armeria_user")
 public class User implements Persistable<String> {
 
@@ -31,10 +28,10 @@ public class User implements Persistable<String> {
     private String cellPhone;
 
     @Transient
-    private boolean isNew;
+    private boolean isNew = false;
 
-    public void setNew() {
-        this.isNew = true;
+    public void setIsNew(boolean isNew) {
+        this.isNew = isNew;
     }
 
     @Override
