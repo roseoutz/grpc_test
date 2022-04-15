@@ -11,14 +11,15 @@ dependencyManagement {
 dependencies {
     implementation project(path: ":grpc-bds-interface-demo", configuration: 'default')
 
-    implementation 'com.linecorp.armeria:armeria-grpc'
     implementation 'com.linecorp.armeria:armeria-spring-boot2-webflux-starter'
+    implementation 'com.linecorp.armeria:armeria-spring-boot2-starter'
 
+    implementation 'com.linecorp.armeria:armeria-grpc'
     implementation 'com.linecorp.armeria:armeria'
     implementation 'com.linecorp.armeria:armeria-brave'
 
-    implementation 'com.linecorp.armeria:armeria-spring-boot2-starter'
-
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'io.r2dbc:r2dbc-h2'
+    implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 }

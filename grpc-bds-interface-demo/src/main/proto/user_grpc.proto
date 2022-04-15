@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package com.example.grpc;
+
+option java_multiple_files = true;
+option java_package = "com.example.grpc";
+
+import "google/protobuf/struct.proto";
+
+service UserGrpcService {
+  rpc getByOid(UserOidRequest) returns (UserRpcResponse);
+  rpc getByUserId(UserIDRequest) returns (UserRpcResponse);
+  rpc addUser(UserRpcRequest) returns (UserRpcResponse);
+}
+
+message UserOidRequest {
+  string oid = 1;
+}
+
+message UserIDRequest {
+  string userId = 1;
+}
+
+message UserRpcRequest {
+  string userId = 1;
+  string username = 2;
+  string password = 3;
+  string cellPhone = 4;
+}
+
+message UserRpcResponse {
+  int32 statusCode = 1;
+  bool success = 2;
+  google.protobuf.NullValue errorCode = 3;
+  google.protobuf.NullValue errorDescription = 4;
+  map<string, string> dataMap = 5;
+}
+
+message DefaultResponse {
+  int32 statusCode = 1;
+  bool success = 2;
+  google.protobuf.NullValue errorCode = 3;
+  google.protobuf.NullValue errorDescription = 4;
+  map<string, string> dataMap = 5;
+}
