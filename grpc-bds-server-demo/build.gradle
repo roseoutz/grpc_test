@@ -19,7 +19,10 @@ dependencies {
     implementation 'com.linecorp.armeria:armeria-brave'
 
     implementation 'io.r2dbc:r2dbc-h2'
+
     implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+
+    implementation 'org.springframework.boot:spring-boot-starter-rsocket'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 }
